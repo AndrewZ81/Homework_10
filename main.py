@@ -40,8 +40,27 @@ def get_by_pk(id):
             list_of_candidate_for_output.append("Позиция кандидата - " + i["position"])
             list_of_candidate_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
     string_of_candidate_for_output = "\n".join(list_of_candidate_for_output)
-    return f"<img src={url}><pre>{string_of_candidate_for_output}</pre>"
+    return f"<img src={url}>\n<pre>{string_of_candidate_for_output}</pre>"
 
+
+# Создаём маршрут для поиска кандидатов по навыку
+@app.route("/skills/<skill>")
+def get_by_skill(skill):
+    """
+    :param skill: Навык для поиска
+    :return: Преформатированную строку кандидатов с данным навыком
+    """
+    list_of_candidates_for_output = []
+    for i in candidates:
+        list_of_skills = i["skills"].split(", ")
+        for k in list_of_skills:
+            if skill.lower() == k.lower():
+                list_of_candidates_for_output.append("Имя кандидата - " + i["name"])
+                list_of_candidates_for_output.append("Позиция кандидата - " + i["position"])
+                list_of_candidates_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
+                break
+    string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
+    return f"<pre>{string_of_candidates_for_output}</pre>"
 
 # Запускаем сервер
 app.run()
