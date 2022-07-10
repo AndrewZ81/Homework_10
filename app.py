@@ -1,5 +1,5 @@
 # Импортируем модуль functions для работы с форматом JSON
-import functions
+import utils
 
 # Читаем список кандидатов
 candidates = functions.load_candidates("candidates.json")
@@ -33,6 +33,7 @@ def get_by_pk(id):
     :return: Данные кандидата по его номеру
     """
     list_of_candidate_for_output = []
+    url = ""
     for i in candidates:
         if i["pk"] == id:
             url = i["picture"]
@@ -63,4 +64,5 @@ def get_by_skill(skill):
     return f"<pre>{string_of_candidates_for_output}</pre>"
 
 # Запускаем сервер
-app.run()
+if __name__ == '__main__':
+    app.run()
