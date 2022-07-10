@@ -17,5 +17,9 @@ def page_feed():
 def page_messages():
     return "Сообщения пользователя"
 
+@app.route("/item/<itemid>")
+def item(itemid):
+    return f"<h1>Товар {itemid}</h1>"
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.2", port=80)
+    app.run()
